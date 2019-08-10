@@ -9,7 +9,7 @@ export default [
         children:[
             {
                 title:"按钮",
-                key:"/admin/ui/button",
+                key:"/admin/ui/buttons",
             },
             {
                 title:"弹框",

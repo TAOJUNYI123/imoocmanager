@@ -4,7 +4,7 @@ import NavLeft from './components/NavLeft';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import './style/common.less';
-import Home from './pages/home'
+// import Home from './pages/home'
 export default class Admin extends React.Component{
     render(){
         return(
@@ -16,7 +16,8 @@ export default class Admin extends React.Component{
                     <Header/>
                     <Row className="content">
                         {/* Content */}
-                        <Home/>
+                        {/* <Home/> */}
+                        {this.props.children}
                     </Row>
                     <Footer/>
                 </Col>
