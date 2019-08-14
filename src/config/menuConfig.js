@@ -17,21 +17,61 @@ export default [
             },
             {
                 title:"Loading",
-                key:"/admin/ui/loading",
+                key:"/admin/ui/loadings",
+            },
+            {
+                title:'通知提醒',
+                key:'/admin/ui/notification',
+            },
+            {
+                title:'全局Message',
+                key:'/admin/ui/messages',
+            },
+            {
+                title:'Tab页签',
+                key:'/admin/ui/tabs',
+            },
+            {
+                title:'图片画廊',
+                key:'/admin/ui/gallery',
+            },
+            {
+                title:'轮播图',
+                key:'/admin/ui/carousel',
             }
         ]
     },
     {
         title:"表单",
         key:"/admin/form",
+        children:[
+            {
+                title:'登录',
+                key:'/admin/form/login',
+            },
+            {
+                title:'注册',
+                key:'/admin/form/reg',
+            }
+        ]
     },
     {
         title:"表格",
         key:"/admin/table",
+        children:[
+            {
+                title:'基础表格',
+                key:'/admin/table/basic',
+            },
+            {
+                title:'高级表格',
+                key:'/admin/table/high',
+            }
+        ]
     },
     {
         title:"富文本",
-        key:"/admin/richText",
+        key:"/admin/rich",
     },
     {
         title:"城市管理",
@@ -51,7 +91,21 @@ export default [
     },
     {
         title:"图标",
-        key:"/admin/icon",
+        key:"/admin/charts",
+        children:[
+            {
+                title:'柱形图',
+                key:'/admin/charts/bar'
+            },
+            {
+                title:'饼图',
+                key:'/admin/charts/pie'
+            },
+            {
+                title:'折线图',
+                key:'/admin/charts/line'
+            },
+        ]
     },
     {
         title:"权限设置",

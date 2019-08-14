@@ -15,9 +15,18 @@ export default class Modals extends React.Component {
             [type]:true
         })
     }
-    handleCancel = ()=>{
-        this.setState({
-            showModal1:false
+    handleConfirm = (type)=>{
+        // Modal.confirm() 等价于
+        // Modal['confirm']
+        Modal[type]({
+            title:"确认",
+            content:"你确定你学会react了吗？",
+            onOk(){
+                console.log("ok")
+            },
+            onCancel(){
+                console.log("cancel")
+            }
         })
     }
     render() {
@@ -26,17 +35,67 @@ export default class Modals extends React.Component {
                 <Card title="基础模态框" className="card-wrap">
                     {/* 传参需要使用箭头函数，不传参可以不用 */}
                     <Button type="primary" onClick={()=>this.handleOpen('showModal1')}>Open</Button>
-                    <Button type="primary" onClick={()=>this.handleOpen('showModal2')}>Open</Button>
-                    <Button type="primary" onClick={()=>this.handleOpen('showModal3')}>Open</Button>
-                    <Button type="primary" onClick={()=>this.handleOpen('showModal4')}>Open</Button>
+                    <Button type="primary" onClick={()=>this.handleOpen('showModal2')}>自定义页脚</Button>
+                    <Button type="primary" onClick={()=>this.handleOpen('showModal3')}>顶部20px弹框</Button>
+                    <Button type="primary" onClick={()=>this.handleOpen('showModal4')}>水平垂直居中</Button>
+                </Card>
+                <Card title="信息确认框" className="card-wrap">
+                    {/* 传参需要使用箭头函数，不传参可以不用 */}
+                    <Button type="primary" onClick={()=>this.handleConfirm('confirm')}>Confirm</Button>
+                    <Button type="primary" onClick={()=>this.handleConfirm('info')}>Info</Button>
+                    <Button type="primary" onClick={()=>this.handleConfirm('success')}>Success</Button>
+                    <Button type="primary" onClick={()=>this.handleConfirm('warning')}>Warning</Button>
+                </Card>
                     <Modal
                         title="react"
                         visible={this.state.showModal1}
-                        onCancel={this.handleCancel}
+                        onCancel={()=>{
+                            this.setState({
+                                showModal1:false
+                            })
+                        }}
                     >
                         欢迎学习antD啦啦啦啦啦啦啦啦啦啦啦啦啦。
                     </Modal>
-                </Card>
+                    <Modal
+                        title="react"
+                        okText="好的"
+                        cancelText="算了"
+                        visible={this.state.showModal2}
+                        onCancel={()=>{
+                            this.setState({
+                                showModal2:false
+                            })
+                        }}
+                    >
+                        欢迎学习antD啦啦啦啦啦啦啦啦啦啦啦啦啦。
+                    </Modal>
+                    <Modal
+                        title="react"
+                        style={{top:20}}
+                        visible={this.state.showModal3}
+                        onCancel={()=>{
+                            this.setState({
+                                showModal3:false
+                            })
+                        }}
+                    >
+                        欢迎学习antD啦啦啦啦啦啦啦啦啦啦啦啦啦。
+                    </Modal>
+                    <Modal
+                        title="react"
+                        wrapClassName="vertical-center-modal"
+                        visible={this.state.showModal4}
+                        onCancel={()=>{
+                            this.setState({
+                                showModal4:false
+                            })
+                        }}
+                    >
+                        欢迎学习antD啦啦啦啦啦啦啦啦啦啦啦啦啦。
+                    </Modal>
+                
+                
             </div>
         )
     }
