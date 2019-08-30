@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Table } from 'antd';
+import { Card, Table, Button, Modal, message } from 'antd';
 // 凡是从npm下载的插件，不会用，就去npmjs官网搜索此插件
 import axios from './../../axios/index';
 export default class BasicTable extends React.Component {
@@ -65,7 +65,9 @@ export default class BasicTable extends React.Component {
           item.key = index;
         })
         this.setState({
-          dataSource2:res.result
+          dataSource2:res.result,
+          selectedRowKeys:[],
+          selectedRows:null
         })
       }
     })
@@ -81,6 +83,22 @@ export default class BasicTable extends React.Component {
       console.log(this.state.selectedItem)
     })
   }
+  // 多选删除按钮
+  handleDelete = ()=>{
+    let rows = this.state.selectedRows;
+    let ids = [];
+    rows.map((item)=>{
+      ids.push(item.id)
+    })
+    Modal.confirm({
+      title:'删除提示',
+      content:`您确定要删除${ids.join(',')}等数据吗？`,
+      onOk:()=>{
+        this.request()
+        message.success('删除成功！');
+      }
+    })
+  }
   render() {
     const columns = [
       {
@@ -94,9 +112,12 @@ export default class BasicTable extends React.Component {
       {
         title: '性别',
         dataIndex: 'sex',
-        render(sex){
-          return sex === 1 ? '男' : '女'
-        }
+        render: (text, row, index) => {
+          return text === 1 ? '男' : '女';
+        },
+        // render(sex){
+        //   return sex === 1 ? '男' : '女'
+        // }
       },
       {
         title: '状态',
@@ -144,7 +165,23 @@ export default class BasicTable extends React.Component {
       type:'radio',
       selectedRowKeys
     }
-
+    const rowCheckSelection = {
+      type:'checkbox',
+      selectedRowKeys,
+      onChange:(selectedRowKeys,selectedRows)=>{
+        // let ids = [];
+        // selectedRows.map((item)=>{
+        //   ids.push(item)
+        // })
+        this.setState({
+          selectedRowKeys,
+          // selectedIds:ids
+          selectedRows
+        })
+        console.log(selectedRowKeys)
+        console.log(selectedRows)
+      }
+    }
     return (
       <div>
         <Card title="基础表格">
@@ -174,6 +211,16 @@ export default class BasicTable extends React.Component {
                 }, // 点击行
               };
             }}
+            columns={columns}
+            dataSource={this.state.dataSource2}
+            pagination={false}
+          />
+        </Card>
+        <Card title="Mock-复选" style={{ margin: '10px 0' }}>
+          <Button type="danger" onClick={this.handleDelete}>删除</Button>
+          <Table
+            bordered
+            rowSelection={rowCheckSelection}
             columns={columns}
             dataSource={this.state.dataSource2}
             pagination={false}
